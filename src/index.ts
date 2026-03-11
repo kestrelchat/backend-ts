@@ -49,7 +49,6 @@ app.get('/ws', { websocket: true }, (conn) => {
 app.listen({ port: 5173 }, (err, address) => {
   if (err) {
     console.error('Error starting:', err);
-    process.exit(1);
   }
   console.log(`Running at ${address}`);
 });
