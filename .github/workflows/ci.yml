@@ -15,31 +15,49 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - uses: actions/setup-node@v3
         with:
           node-version: 20
           cache: 'yarn'
-      - run: yarn install --frozen-lockfile
+
+      - run: |
+          corepack enable
+          corepack prepare yarn@4.13.0 --activate
+          yarn install --immutable
+
       - run: yarn tsc --noEmit
 
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - uses: actions/setup-node@v3
         with:
           node-version: 20
           cache: 'yarn'
-      - run: yarn install --frozen-lockfile
+
+      - run: |
+          corepack enable
+          corepack prepare yarn@4.13.0 --activate
+          yarn install --immutable
+
       - run: yarn lint
 
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - uses: actions/setup-node@v3
         with:
           node-version: 20
           cache: 'yarn'
-      - run: yarn install --frozen-lockfile
+
+      - run: |
+          corepack enable
+          corepack prepare yarn@4.13.0 --activate
+          yarn install --immutable
+
       - run: yarn test
