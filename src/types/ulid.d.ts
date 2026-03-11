@@ -16,21 +16,6 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { buildApp } from './app';
-
-async function start() {
-  try {
-    const app = buildApp();
-
-    const address = await app.listen({
-      port: 5173,
-      host: '0.0.0.0',
-    });
-
-    console.log(`Running at ${address}`);
-  } catch (err) {
-    console.error('Error starting:', err);
-  }
+declare module 'ulid' {
+  export function ulid(): string;
 }
-
-start();
