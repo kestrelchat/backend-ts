@@ -17,14 +17,15 @@
  */
 
 import { buildApp } from './app';
+import { config } from './utils/config';
 
 async function start() {
   try {
     const app = buildApp();
 
     const address = await app.listen({
-      port: 5173,
-      host: '0.0.0.0',
+      port: config.server.port,
+      host: config.server.host,
     });
 
     console.log(`Running at ${address}`);

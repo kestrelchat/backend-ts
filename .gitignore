@@ -9,6 +9,5 @@ node_modules/
 !.yarn/sdks
 !.yarn/versions
 
-# Environment variables
-*.env
-!example.env
+# Config files
+kestrel.toml
