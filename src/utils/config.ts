@@ -36,6 +36,12 @@ export interface KestrelConfig {
     host: string;
     port: number;
   };
+  database: {
+    postgres: {
+      url: string;
+      max_connections: number;
+    };
+  };
 }
 
 function createConfig<T extends object>(obj: unknown): T {

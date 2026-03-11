@@ -16,31 +16,20 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import Fastify from 'fastify';
+import { Pool } from 'pg';
+import { config } from '../../utils/config';
 
-import swaggerPlugin from './plugins/swagger';
-import websocketPlugin from './plugins/websocket';
-import postgresPlugin from './plugins/postgres';
-import errorHandlerPlugin from './plugins/errorHandler';
-import apiRoutes from './modules/api/routes';
-import wsRoutes from './modules/ws/routes';
+export const postgres = new Pool({
+  connectionString: config.database.postgres.url,
+  max: config.database.postgres.max_connections,
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 2000,
+});
 
-export function buildApp() {
-  const app = Fastify();
+postgres.on('connect', () => {
+  console.log('Postgres connected');
+});
 
-  app.register(swaggerPlugin);
-  app.register(websocketPlugin);
-  app.register(postgresPlugin);
-
-  app.register(apiRoutes, {
-    prefix: '/api',
-  });
-
-  app.register(wsRoutes, {
-    prefix: '/ws',
-  });
-
-  app.register(errorHandlerPlugin);
-
-  return app;
-}
+postgres.on('error', (err) => {
+  console.error('Postgres error:', err);
+});

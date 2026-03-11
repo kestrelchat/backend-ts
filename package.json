@@ -23,14 +23,18 @@
     "lint": "eslint . --ext .ts,.js",
     "lint:fix": "eslint . --ext .ts,.js --fix",
     "format": "prettier . --write",
-    "format:check": "prettier . --check"
+    "format:check": "prettier . --check",
+    "migrate": "py scripts/migrate.py",
+    "migrate:new": "npx node-pg-migrate create"
   },
   "dependencies": {
     "@fastify/swagger": "^9.7.0",
     "@fastify/swagger-ui": "^5.2.5",
     "@fastify/websocket": "^11.2.0",
+    "@iarna/toml": "^2.2.5",
     "eslint-plugin-prettier": "^5.5.5",
     "fastify": "^5.8.2",
+    "pg": "^8.20.0",
     "ulid": "^3.0.2"
   },
   "devDependencies": {
@@ -38,6 +42,7 @@
     "@eslint/js": "^10.0.1",
     "@types/mocha": "^10.0.10",
     "@types/node": "^25.4.0",
+    "@types/pg": "^8",
     "@typescript-eslint/eslint-plugin": "^8.57.0",
     "@typescript-eslint/parser": "^8.57.0",
     "concurrently": "^9.2.1",
@@ -46,6 +51,7 @@
     "eslint-plugin-license-header": "^0.9.0",
     "globals": "^17.4.0",
     "mocha": "^11.7.5",
+    "node-pg-migrate": "^8.0.4",
     "prettier": "^3.8.1",
     "rimraf": "^6.1.3",
     "ts-node": "^10.9.2",

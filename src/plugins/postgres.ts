@@ -16,31 +16,16 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import Fastify from 'fastify';
+import fp from 'fastify-plugin';
+import { postgres } from '../database/postgres/client';
+import { FastifyPluginAsync } from 'fastify';
 
-import swaggerPlugin from './plugins/swagger';
-import websocketPlugin from './plugins/websocket';
-import postgresPlugin from './plugins/postgres';
-import errorHandlerPlugin from './plugins/errorHandler';
-import apiRoutes from './modules/api/routes';
-import wsRoutes from './modules/ws/routes';
+const postgresPlugin: FastifyPluginAsync = async (app) => {
+  app.decorate('postgres', postgres);
 
-export function buildApp() {
-  const app = Fastify();
-
-  app.register(swaggerPlugin);
-  app.register(websocketPlugin);
-  app.register(postgresPlugin);
-
-  app.register(apiRoutes, {
-    prefix: '/api',
+  app.addHook('onClose', async () => {
+    await postgres.end();
   });
+};
 
-  app.register(wsRoutes, {
-    prefix: '/ws',
-  });
-
-  app.register(errorHandlerPlugin);
-
-  return app;
-}
+export default fp(postgresPlugin);
