@@ -37,7 +37,7 @@ app.get('/ws', { websocket: true }, (conn) => {
   clients.add(conn.socket);
   console.log('WS client connected');
 
-  conn.socket.on('message', (msg) => {
+  conn.socket.on('message', (msg: string | Buffer) => {
     for (const client of clients) {
       client.send(msg.toString());
     }
