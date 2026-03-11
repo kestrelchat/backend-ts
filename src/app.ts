@@ -16,6 +16,7 @@
 
 import Fastify from 'fastify';
 
+import swaggerPlugin from './plugins/swagger';
 import websocketPlugin from './plugins/websocket';
 import apiRoutes from './modules/api/routes';
 import wsRoutes from './modules/ws/routes';
@@ -23,6 +24,7 @@ import wsRoutes from './modules/ws/routes';
 export function buildApp() {
   const app = Fastify();
 
+  app.register(swaggerPlugin);
   app.register(websocketPlugin);
 
   app.register(apiRoutes, {

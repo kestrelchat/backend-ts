@@ -26,6 +26,8 @@
     "format:check": "prettier . --check"
   },
   "dependencies": {
+    "@fastify/swagger": "^9.7.0",
+    "@fastify/swagger-ui": "^5.2.5",
     "@fastify/websocket": "^11.2.0",
     "eslint-plugin-prettier": "^5.5.5",
     "fastify": "^5.8.2"
