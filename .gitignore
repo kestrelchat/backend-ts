@@ -1,0 +1,14 @@
+# Dependancy directories
+node_modules/
+
+# Yarn directories
+.yarn/*
+!.yarn/releases
+!.yarn/patches
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+
+# Environment variables
+*.env
+!example.env
